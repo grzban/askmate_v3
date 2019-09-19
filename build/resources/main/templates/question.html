@@ -1,0 +1,77 @@
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<section class="content-header" th:replace="header.html"></section>
+<article>
+
+    <!--<table>
+        <tr th:text="${question.title}"></tr>
+        <tr th:text="${question.description}"></tr>
+        <tr th:each="answer : ${question.answers}">
+            <td th:text="${answer.answerString}"></td>
+            <td th:text="${answer.user.name}"></td>
+        </tr>
+    </table>-->
+    <!-- Editable table -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Thread of question</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a href="answer/add" class="text-success">
+                        <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                    </a>
+                </span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                        <td width=20%>Subject</td>
+                        <td><h5 th:text="${question.title}" th:align="left"></h5></td>
+                    </tr>
+                    <tr>
+                        <td width=20%>Description</td>
+                        <td><h5 th:text="${question.description}" th:align="left"></h5></td>
+                    </tr>
+                    <tr>
+                        <td width=20%>User</td>
+                        <td><h5 th:text="${question.user.name}" th:align="left"></h5></td>
+                    </tr>
+                </table>
+                <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Answers</h3>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Answer</th>
+                        <th scope="col">Respondent</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="answer, iterator: ${question.answers}">
+                        <td class="pt-3-half" contenteditable="true" th:text="${iterator.index + 1}"></td>
+                        <td class="pt-3-half" contenteditable="true" th:text="${answer.answerString}"></td>
+                        <td class="pt-3-half" contenteditable="true" th:text="${answer.user.name}"></td>
+                        <td>
+                            <span class="table-remove">
+                                <form action="#" th:action="@{'answer/{id}/edit'(id=${answer.id})}"
+                                      th:object="${answer}"
+                                      th:method="POST">
+                                <button type="submit" class="btn btn-orange btn-rounded btn-sm my-0">Edit</button>
+                                </form>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="table-remove">
+                                <form action="#" th:action="@{'answer/{id}/delete'(id=${answer.id})}"
+                                      th:object="${answer}" th:method="POST">
+                                <button type="submit" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                                </form>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Editable table -->
+</article>
+<section class="content-header" th:replace="footer.html"></section>

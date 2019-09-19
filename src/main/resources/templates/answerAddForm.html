@@ -1,0 +1,31 @@
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<section class="content-header" th:replace="header.html"></section>
+<article>
+    <!--Modal: Contact form-->
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header info-color white-text">
+                <h4 class="title">
+                    <i class="fa fa-pencil-alt"></i> Insert your answer</h4>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <!-- Default textarea message -->
+                <form action="#" th:action="@{'/question/{id}/answer/add'(id=${id})}" th:object="${answer}" th:method="POST">
+                    <label for="defaultFormMessageModalEx">Your answer</label>
+                    <textarea type="text" id="defaultFormMessageModalEx" class="md-textarea form-control"
+                              th:field="${answer.answerString}"></textarea>
+                    <div class="text-center mt-4 mb-2">
+                        <button class="btn btn-info">Send
+                            <i class="fa fa-send ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</article>
+<section class="content-header" th:replace="footer.html"></section>

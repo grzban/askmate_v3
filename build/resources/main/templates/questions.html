@@ -1,0 +1,61 @@
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<section class="content-header" th:replace="header.html"></section>
+<article>
+    <!-- Editable table -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Questions</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a href="/question/add" class="text-success">
+                        <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                    </a>
+                </span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center"></th>
+                        <th class="text-center"></th>
+                        <th class="text-center"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="question, iterator : ${questions}">
+                        <td class="pt-3-half" contenteditable="true" th:text="${iterator.index + 1}"></td>
+                        <td class="pt-3-half" contenteditable="true" th:text="${question.getTitle()}"></td>
+                        <td class="pt-3-half" contenteditable="true" th:text="${question.getDescription()}"></td>
+                        <td class="pt-3-half" contenteditable="true">
+                            <span class="table-remove">
+                                <form th:action="@{'/question/{id}/'(id=${question.id})}" th:method="get">
+                                    <button type="submit" class="btn btn-green btn-rounded btn-sm my-0">Show</button>
+                                </form>
+                            </span>
+                        </td>
+                        <td class="pt-3-half" contenteditable="true">
+                            <span class="table-remove">
+                                <form action="#" th:action="@{'/question/{id}/edit'(id=${question.id})}"
+                                      th:method="post">
+                                <button type="submit" class="btn btn-orange btn-rounded btn-sm my-0">Edit</button>
+                                </form>
+                            </span>
+                        </td>
+                        <td class="pt-3-half" contenteditable="true">
+                            <span class="table-remove">
+                                <form action="#" th:action="@{'/question/{id}/delete'(id=${question.id})}"
+                                      th:method="post">
+                                    <button type="submit" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                                </form>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Editable table -->
+</article>
+<section class="content-header" th:replace="footer.html"></section>

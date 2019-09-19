@@ -1,0 +1,38 @@
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<section class="content-header" th:replace="header.html"></section>
+<article>
+    <!--Modal: Contact form-->
+    <form action="#" th:action="@{'/question/add'}" th:object="${question}" method="POST">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header info-color white-text">
+                    <h4 class="title">
+                        <i class="fa fa-pencil-alt"></i> Adding new Question</h4>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <!-- Default input name -->
+                    <label for="defaultFormNameModalEx">Subject</label>
+                    <input type="text" th:field="${question.title}" id="defaultFormNameModalEx"
+                           class="form-control form-control-sm">
+                    <br>
+                    <!-- Default textarea message -->
+                    <label for="defaultFormMessageModalEx">Describe your problem</label>
+                    <textarea type="text" th:field="${question.description}" id="defaultFormMessageModalEx"
+                              class="md-textarea form-control"></textarea>
+
+                    <div class="text-center mt-4 mb-2">
+                        <button class="btn btn-info">Send
+                            <i class="fa fa-send ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+        <!--/Modal: Contact form-->
+    </form>
+</article>
+<section class="content-header" th:replace="footer.html"></section>

@@ -1,0 +1,48 @@
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<section class="content-header" th:replace="header.html"></section>
+<article>
+    <!-- Editable table -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Users</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a href="/user/add" class="text-success">
+                        <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                    </a>
+                </span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user, iterator : ${users}">
+                        <td class="pt-3-half" contenteditable="true" th:text="${iterator.index + 1}"></td>
+                        <td class="pt-3-half" contenteditable="true" th:text="${user.name}"></td>
+                        <td>
+                            <th:form action="#" th:action="@{'/user/{id}'(id=${user.id})}" th:method="delete">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <span class="table-remove">
+                                <button type="submit" id="submitButton" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                                </span>
+                            </th:form>
+                            <!--<form action="#" th:action="@{'/user/' + ${user.id}}" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <span class="table-remove">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                                </span>
+                            </form>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Editable table -->
+</article>
+<section class="content-header" th:replace="footer.html"></section>
